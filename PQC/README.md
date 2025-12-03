@@ -6,7 +6,6 @@ Today, most internet security—like banking, emails, and online shopping—reli
 
 PQC develops new algorithms that remain secure even in a world with quantum computers.
 
----
 
 ## Why It’s Needed
 1. **Classical encryption** (RSA, ECC) relies on problems like factoring large numbers or solving discrete logs.  
@@ -14,7 +13,6 @@ PQC develops new algorithms that remain secure even in a world with quantum comp
 3. If large quantum computers exist, all current encryption could be broken.  
 4. PQC protects sensitive data **before quantum computers arrive**.
 
----
 
 ## History
 - **1970s–1990s:** RSA, Diffie-Hellman, ECC are developed and become standard for secure communication.  
@@ -23,7 +21,6 @@ PQC develops new algorithms that remain secure even in a world with quantum comp
 - **2016–2017:** NIST (National Institute of Standards and Technology) starts formal **PQC standardization process**.  
 - **2022–2024:** NIST selects several PQC algorithms for standardization, with final standards expected around **2025–2026**.
 
----
 
 ## Technical Explanation (Simplified)
 Post-Quantum Cryptography relies on math problems that **quantum computers cannot solve efficiently**. Main approaches include:
@@ -51,14 +48,12 @@ Post-Quantum Cryptography relies on math problems that **quantum computers canno
 - Uses math from elliptic curves in a way quantum computers struggle with.  
 - Example: **SIKE** (withdrawn from NIST due to vulnerabilities).
 
----
 
 ## Timelines
 - **Now (2025):** NIST is finalizing PQC standards. Early adoption in testing environments is possible.  
 - **Next 5–10 years:** Gradual deployment in sensitive areas like government, banking, and cloud services.  
 - **10+ years:** PQC likely becomes standard for most digital communications, replacing RSA/ECC.
 
----
 
 ## Key Takeaways
 - PQC is **future-proof encryption** against quantum attacks.  
