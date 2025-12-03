@@ -60,3 +60,10 @@ Post-Quantum Cryptography relies on math problems that **quantum computers canno
 - It uses **new math problems** quantum computers cannot solve efficiently.  
 - NIST is leading standardization, with some algorithms already selected.  
 - Transition is gradual but urgent; sensitive data today could be compromised by future quantum computers.
+
+- ## Currently Available
+- ML-KEM (CRYSTALS-Kyber) - Key exchange / encryption. Will replace RSA and Diffie-Hellman/ECDH for secure key sharing.
+- CRYSTALS-Dilithium - Digital signatures. Will replace RSA, DSA, and ECDSA for authentication, certificate signing, and code signing.
+- SPHINCS+ - Hash-based digital signatures. A backup alternative to replace RSA, DSA, and ECDSA for long-term security.
+
+
