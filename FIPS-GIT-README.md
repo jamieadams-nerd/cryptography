@@ -151,9 +151,9 @@ Type `yes` to accept
 ssh -T -vvv git@github.com
 ```
 
-Expected output:
+Expected output (amongst the numerous debug messages caused by the -vvv):
 
-Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+`Hi username! You've successfully authenticated, but GitHub does not provide shell access.`
 
 ## Step 7: Configure Git user information
 
