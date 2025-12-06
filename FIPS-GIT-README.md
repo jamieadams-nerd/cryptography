@@ -1,14 +1,16 @@
+My motivation for doing this research was when I tried to use an elliptcal curve algorithm when sitting up my "git" confugraiotn on a RHEL 10 platform with the kernel mode in FIPS.
+
 This guide provides a step-by-step workflow for configuring a FIPS-compliant Linux system to securely work with GitHub. It covers detecting FIPS mode, generating and configuring RSA SSH keys 
 for authentication, creating GPG keys for signing commits, adding keys to GitHub, initializing repositories, pushing signed commits, and troubleshooting common issues. Following 
 these procedures ensures that all Git operations are secure, cryptographically compliant, and verifiable, making it easier for developers to maintain code integrity and work safely 
 in environments with strict compliance requirements.
+
 
 # Overview
 
 This guide outlines how to configure a FIPS-compliant Linux system to work with GitHub, including generating and using SSH and GPG keys, signing commits, and troubleshooting common issues.
 
 The main procedures covered are:
-
 * FIPS Mode Detection
 * Check if the system is running in FIPS mode to ensure only approved cryptographic algorithms are used.
 * Helps avoid errors when generating keys or connecting to GitHub.
@@ -32,7 +34,6 @@ The main procedures covered are:
 * Helps identify and resolve common FIPS-related connection issues.
 
 How this helps someone:
-
 * Ensures secure Git operations on systems that must comply with FIPS regulations.
 * Prevents errors caused by unsupported cryptography in FIPS mode (e.g., ECDSA or ED25519 keys).
 * Guarantees that commits are signed and verifiable, improving trust in code integrity.
@@ -49,17 +50,18 @@ How this helps someone:
 
 Check if FIPS mode is enabled. Non-FIPS keys and algorithms will fail.
 
+```bash
 cat /proc/sys/crypto/fips_enabled
+```
 
-
-Output 1 → FIPS mode enabled
-
-Output 0 → FIPS mode disabled
+* Output 1 → FIPS mode enabled
+* Output 0 → FIPS mode disabled
 
 Alternatively:
 
+```bash 
 fips-mode-setup --check
-
+```
 
 Reports FIPS mode enabled or disabled
 
@@ -67,27 +69,23 @@ Example errors if using non-FIPS keys:
 
 ED25519:
 
+```bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+May show: `key type not allowed in FIPS mode`
 
 
-May show:
-
-key type not allowed in FIPS mode
-
-
-ECDSA when connecting:
-
-kex_exchange_identification: no matching key exchange method found
-
+ECDSA when connecting: `kex_exchange_identification: no matching key exchange method found`
 
 These indicate RSA 4096 is required in FIPS mode.
 
 Check allowed SSH algorithms:
+```bash
 ssh -Q key
 ssh -Q kex
 ssh -Q cipher
 ssh -Q mac
-
+```
 
 ssh-rsa should appear; ecdsa and ed25519 will not
 
@@ -181,47 +179,52 @@ gpg --full-generate-key
 gpg --list-secret-keys --keyid-format LONG
 ````
 
-
 Copy the key ID (e.g., ABCDEF1234567890)
 
-Step 10: Add the GPG key to your GitHub account
+
+## Step 10: Add the GPG key to your GitHub account
 
 Export the public GPG key:
-
+```bash
 gpg --armor --export ABCDEF1234567890
-
+```
 
 Go to GitHub → Settings → SSH and GPG keys → New GPG key
 
 Paste the key and save
 
-Step 11: Configure Git to use the GPG key
+## Step 11: Configure Git to use the GPG key
+```bash
 git config --global user.signingkey ABCDEF1234567890
 git config --global commit.gpgsign true
+```
 
-Step 12: Create a local Git repository and make the first commit
+## Step 12: Create a local Git repository and make the first commit
+```bash
 mkdir ~/test-repo
 cd ~/test-repo
 git init
 echo "Hello FIPS GitHub" > README.md
 git add README.md
 git commit -S -m "Initial commit"
-
+```
 
 -S signs the commit
 
 Note: GitHub now uses main as the default branch instead of master
 
 Rename branch to main:
-
+```bash
 git branch -M main
-
+```
 
 Optional: set all future repositories to default to main:
-
+```bash
 git config --global init.defaultBranch main
+```
 
-Step 13: Create a repository on GitHub
+
+## Step 13: Create a repository on GitHub
 
 Go to GitHub → New Repository
 
