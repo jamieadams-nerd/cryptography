@@ -200,6 +200,8 @@ git config --global commit.gpgsign true
 ```
 
 ## Step 12: Create a local Git repository and make the first commit
+You should skip this step and step 13 if you already know how to manage repositories and perform a commit. 
+
 ```bash
 mkdir ~/test-repo
 cd ~/test-repo
