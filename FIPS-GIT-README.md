@@ -200,7 +200,7 @@ git config --global commit.gpgsign true
 ```
 
 ## Step 12: Create a local Git repository and make the first commit
-You should skip this step and step 13 if you already know how to manage repositories and perform a commit. 
+You should skip to step 17 if you already know how to manage repositories and perform a commit. 
 
 ```bash
 mkdir ~/test-repo
@@ -236,93 +236,82 @@ Do not initialize with README
 
 Copy the SSH URL (e.g., git@github.com:your-username/test-repo.git)
 
-Step 14: Add the remote repository
+## Step 14: Add the remote repository
+```bash
 git remote add origin git@github.com:your-username/test-repo.git
+```
 
-Step 15: Push the main branch
+## Step 15: Push the main branch
+```bash
 git push -u origin main
+```
 
 
 Sets upstream tracking
 
-Step 16: Make future commits
+## Step 16: Make future commits
+```bash
 git add <files>
 git commit -S -m "Your commit message"
 git push
+```
 
-Step 17: Verify signed commits locally
+## Step 17: Verify signed commits locally
+```bash
 git log --show-signature -1
 git log --show-signature
 git verify-commit <commit-hash>
-
-
+```
 Should show Good signature from "Your Name <your_email>"
 
-Step 18: Verify commits on GitHub
-
+## Step 18: Verify commits on GitHub
 Signed commits show a green “Verified” checkmark
 
-Step 19: Diagnostics and troubleshooting
 
-Check loaded SSH keys
-
+## Step 19: Diagnostics and troubleshooting
+### Check loaded SSH keys
+```bash
 ssh-add -l
+```
 
-
-Verbose SSH connection to GitHub
-
+### Verbose SSH connection to GitHub
+```bash
 ssh -vvv -T git@github.com
+```
 
+`-vvv` gives detailed debug output
 
--vvv gives detailed debug output
+`-T` disables pseudo-tty allocation (required for GitHub SSH)
 
--T disables pseudo-tty allocation (required for GitHub SSH)
-
-Check known_hosts
-
+### Check known_hosts
+```bash
 cat ~/.ssh/known_hosts
+```
 
-
-Check available SSH algorithms
-
+### Check available SSH algorithms
+```bash
 ssh -Q key
 ssh -Q kex
 ssh -Q cipher
 ssh -Q mac
+```
 
-
-Test GPG signing
-
+### Test GPG signing
+```bash
 echo "test" | gpg --clearsign
+```
 
-
-Check Git signing configuration
-
+### Check Git signing configuration
+```bash
 git config --list | grep sign
+```
 
-Step 20: Notes for FIPS mode
+## Step 20: Notes for FIPS mode
+* Only RSA keys are allowed for SSH and GPG
+* ECDSA, ED25519, and PQC keys will fail
+* Host authenticity warnings on first connection are normal
+* SSH config enforces FIPS-approved algorithms
+* Adding your SSH and GPG keys to GitHub is required for authentication and signed commits
+* Following these steps ensures commits are signed, pushed, and verifiable
+* Using `git config --global init.defaultBranch main` ensures new repositories default to main instead of master
 
-Only RSA keys are allowed for SSH and GPG
-
-ECDSA, ED25519, and PQC keys will fail
-
-Host authenticity warnings on first connection are normal
-
-SSH config enforces FIPS-approved algorithms
-
-Adding your SSH and GPG keys to GitHub is required for authentication and signed commits
-
-Following these steps ensures commits are signed, pushed, and verifiable
-
-Using git config --global init.defaultBranch main ensures new repositories default to main instead of master
-
-This guide is now complete, fully corrected, FIPS-aware, includes SSH/GPG key addition to GitHub, diagnostics, and branch naming recommendations.
-
-If you want, I can also make a workflow diagram showing FIPS detection → SSH/GPG key creation → Git setup → commit → push → verification for beginners. This helps visualize the process.
-
-Do you want me to create that diagram?
-
-Attach
-Search
-Study
-Voice
