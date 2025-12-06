@@ -45,7 +45,7 @@ How this helps someone:
 # Step-by-Step Procedures
 
 
-Step 0: Detect if your system is in FIPS mode
+## Step 0: Detect if your system is in FIPS mode
 
 Check if FIPS mode is enabled. Non-FIPS keys and algorithms will fail.
 
@@ -91,36 +91,42 @@ ssh -Q mac
 
 ssh-rsa should appear; ecdsa and ed25519 will not
 
-Step 1: Generate a FIPS-compliant SSH key
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+## Step 1: Generate a FIPS-compliant SSH key
+
+`ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
 
 
 Accept default file (~/.ssh/id_rsa)
 
 Optionally set a passphrase
 
-Step 2: Start the SSH agent and add the key
+
+## Step 2: Start the SSH agent and add the key
+```bash
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
+```
 
-Step 3: Add the SSH key to your GitHub account
+## Step 3: Add the SSH key to your GitHub account
 
 Copy the public key:
-
+```bash
 cat ~/.ssh/id_rsa.pub
-
+```
 
 Go to GitHub → Settings → SSH and GPG keys → New SSH key
 
 Paste the public key and give it a name
 
-Step 4: Configure SSH for FIPS-compliant algorithms
+## Step 4: Configure SSH for FIPS-compliant algorithms
+```bash
 mkdir -p ~/.ssh
 nano ~/.ssh/config
-
+```
 
 Add:
-
+```
 Host github.com
     HostName github.com
     User git
@@ -129,43 +135,51 @@ Host github.com
     KexAlgorithms +diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha256
     HostKeyAlgorithms +ssh-rsa
     PubkeyAcceptedAlgorithms +ssh-rsa
+```
 
-Step 5: Add GitHub’s RSA host key
+## Step 5: Add GitHub’s RSA host key
+
+```bash
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-
+```
 
 First-time warnings are normal
 
-Type yes to accept
+Type `yes` to accept
 
-Step 6: Test SSH connection
-ssh -T git@github.com
 
+## Step 6: Test SSH connection
+```bash
+ssh -T -vvv git@github.com
+```
 
 Expected output:
 
 Hi username! You've successfully authenticated, but GitHub does not provide shell access.
 
-Step 7: Configure Git user information
+## Step 7: Configure Git user information
+
+```bash
 git config --global user.name "Your Name"
 git config --global user.email "your_email@example.com"
+```
 
-Step 8: Generate a GPG key for signing commits
+## Step 8: Generate a GPG key for signing commits
+```bash
 gpg --full-generate-key
+```
 
+* Select RSA and RSA
+* Key size: 4096 bits
+* Expiration optional (I recommend never expire)
+* Enter name and email (this must match your git global settings for user.name and user.email)
+* Optional passphrase
 
-Select RSA and RSA
+## Step 9: List GPG keys and copy the key ID
 
-Key size: 4096 bits
-
-Expiration optional
-
-Enter name and email
-
-Optional passphrase
-
-Step 9: List GPG keys and copy the key ID
+```bash
 gpg --list-secret-keys --keyid-format LONG
+````
 
 
 Copy the key ID (e.g., ABCDEF1234567890)
