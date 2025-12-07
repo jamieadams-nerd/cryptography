@@ -1,4 +1,6 @@
-This **Cryptography repository** contains practical examples of modern cryptography used in high-assurance and security-sensitive systems.
+This **Cryptography repository** contains practical examples of modern cryptography used in high-assurance and security-sensitive systems. This repository is intended for engineers working in regulated or high-assurance environments. It is not a collection of minimal demonstrations. The goal is to support correct implementation, standards compliance, and long-term maintainability.
+
+Readers can expect clear explanations, readable examples, operating system and service configuration guidance, and references to relevant standards and security controls that explain what each cryptographic technique protects, how it is applied, and why it is appropriate in real-world systems.
 
 The primary focus is on FIPS-compliant cryptographic algorithms. The repository explains how these algorithms are used in practice, without diving into their mathematical internals. The emphasis is on what each cryptographic mechanism is for and how it applies in real systems. For example, hashes are described in terms of data integrity, digital signatures in terms of authenticity and integrity, and encryption in terms of protecting confidentiality.
 
@@ -10,6 +12,3 @@ The repository also includes material related to post-quantum cryptography. Thes
 
 Where possible, [post-quantum](PQC/README.md) examples include reference usage or configuration guidance. In some cases, traditional algorithms and post-quantum algorithms are discussed side by side to show how newer approaches can be integrated to satisfy the same security objectives as existing cryptographic mechanisms, even as validation programs such as FIPS evolve over time.
 
-This repository is intended for engineers working in regulated or high-assurance environments. It is not a collection of minimal demonstrations. The goal is to support correct implementation, standards compliance, and long-term maintainability.
-
-Readers can expect clear explanations, readable examples, operating system and service configuration guidance, and references to relevant standards and security controls that explain what each cryptographic technique protects, how it is applied, and why it is appropriate in real-world systems.
