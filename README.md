@@ -8,7 +8,7 @@ Each cryptographic mechanism is discussed in the context of the security objecti
 
 The repository also includes material related to post-quantum cryptography. These sections explain why post-quantum algorithms are needed and what categories of threats they address. The focus remains on practical usage and integration rather than mathematical detail.
 
-Where possible, post-quantum examples include reference usage or configuration guidance. In some cases, traditional algorithms and post-quantum algorithms are discussed side by side to show how newer approaches can be integrated to satisfy the same security objectives as existing cryptographic mechanisms, even as validation programs such as FIPS evolve over time.
+Where possible, [post-quantum](PQC/README.md) examples include reference usage or configuration guidance. In some cases, traditional algorithms and post-quantum algorithms are discussed side by side to show how newer approaches can be integrated to satisfy the same security objectives as existing cryptographic mechanisms, even as validation programs such as FIPS evolve over time.
 
 This repository is intended for engineers working in regulated or high-assurance environments. It is not a collection of minimal demonstrations. The goal is to support correct implementation, standards compliance, and long-term maintainability.
 
